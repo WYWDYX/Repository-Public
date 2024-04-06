@@ -7,6 +7,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom right, rgb(185, 185, 231), rgb(255, 255, 255));
     flex-direction: column;
+    font-family: 'ZCOOL XiaoWei';
 
     .cat-container {
         text-align: center;
