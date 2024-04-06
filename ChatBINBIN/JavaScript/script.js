@@ -140,7 +140,7 @@ const BOT_MSGS = [
 
 const BOT_IMG = "../Image/ChatGPT.svg";
 const PERSON_IMG = "../Image/People.svg";
-const BOT_NAME = "ChatGPT";
+const BOT_NAME = "Chat潇彬";
 const PERSON_NAME = "你";
 
 msgerForm.addEventListener("submit", event => {
