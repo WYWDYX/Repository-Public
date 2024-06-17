@@ -98,6 +98,21 @@
             background-color: #0000ff;
         }
 
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFF;
+            color: rgb(100, 100, 100);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
 
         @keyframes gradient {
             0% {
@@ -137,14 +152,59 @@
         <div>
             © 2024 吴栋。保留所有权利。
         </div>
-        <nav>
-            <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Privacy.html">隐私政策</a>
+        <nav><a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Privacy.html">隐私政策</a>
             <div class="separator"></div> <a
                 href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Copyright.html">版权声明</a>
             <div class="separator"></div> <a
                 href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html">关于我</a>
         </nav>
     </footer>
+    <div id="overlay" style="display:none;">
+        正在加载...
+    </div> <img id="monkey-image" src="https://wywdyx.github.io/GUODUCAT/HAONANMONKEY/monkey.jpg" alt="Monkey"
+        style="max-width: 100%; display: none;">
+    <script>
+        let loadingTimeout;
+
+        function showOverlayMessage(message) {
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = 'flex';
+            overlay.textContent = message;
+        }
+
+        function hideOverlay() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = 'none';
+        }
+
+        function checkOrientation() {
+            if (window.innerHeight > window.innerWidth) {
+                showOverlayMessage('请横屏使用本网站');
+            } else {
+                hideOverlay();
+            }
+        }
+
+        window.addEventListener('resize', checkOrientation);
+        window.addEventListener('load', checkOrientation);
+
+        const monkeyImage = document.getElementById('monkey-image');
+        monkeyImage.onload = function () {
+            clearTimeout(loadingTimeout);
+            hideOverlay();
+            monkeyImage.style.display = 'block';
+        };
+        monkeyImage.onerror = function () {
+            clearTimeout(loadingTimeout);
+            showOverlayMessage('图片加载错误，请稍后再试');
+        };
+
+        loadingTimeout = setTimeout(function () {
+            showOverlayMessage('正在加载...');
+        }, 300);
+
+        checkOrientation();
+    </script>
 </body>
 
 </html>
