@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>加载页面 - 草方块</title>
+  <link rel="icon" href="https://wywdyx.github.io/Repository-Public/Image/Side.webp" sizes="16x16">
+
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #52a535;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .loading {
+      font-family: "Minecrafter-Alt";
+      text-align: center;
+      font-weight: 900;
+      font-size: 40px;
+      position: absolute;
+      bottom: 5%;
+      left: 0;
+      right: 0;
+      background-image: -webkit-linear-gradient(left, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-background-size: 200% 100%;
+      -webkit-animation: masked-animation 4s infinite linear;
+      /* -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; */
+      text-shadow: 0px 1px 0px #c0c0c015,
+        0px 2px 0px #b0b0b025,
+        0px 3px 0px #a0a0a02f,
+        0px 4px 0px #90909000,
+        0px 5px 10px rgba(0, 0, 0, 0.356);
+    }
+
+    p::after {
+      content: "...";
+      animation: loading 1.5s infinite;
+    }
+
+    .footer {
+      width: 85%;
+      position: absolute;
+      font-family: "MyFont";
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+      bottom: 0;
+      height: 30px;
+      color: #000000;
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(-45deg, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+      background-size: 200% 200%;
+      animation: gradient 8s ease infinite;
+      border-radius: 20px;
+      box-sizing: border-box;
+      box-shadow: 0px 1px 0px #c0c0c015,
+        0px 2px 0px #b0b0b025,
+        0px 3px 0px #a0a0a02f,
+        0px 4px 0px #90909000,
+        0px 5px 10px rgba(0, 0, 0, 0.356);
+    }
+
+    .footer nav {
+      display: flex;
+      font-family: "MyFont";
+    }
+
+    .footer nav a {
+      display: inline-block;
+      color: #424245;
+      font-size: 18px;
+      margin-right: 16px;
+      text-decoration: none;
+      font-family: "MyFont";
+    }
+
+    ::selection {
+      color: #ffffff;
+      background-color: #107c10;
+    }
+
+    @font-face {
+      font-family: 'Minecrafter-Alt';
+      src: url('https://wywdyx.github.io/Repository-Public/Font/Minecrafter-Alt.ttf') format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'MyFont';
+      src: url('https://wywdyx.github.io/SITE/Font/MyFont.ttf') format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @-webkit-keyframes masked-animation {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -100% 0;
+      }
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+    }
+  </style>
+</head>
+
+<div class="loading">
+  <p>loading</p>
+</div>
+
+<footer class="footer">
+  <div>
+    © 2024 吴栋。保留所有权利。
+  </div>
+  <nav><a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Privacy.html">隐私政策</a>
+    <div class="separator"></div> <a
+      href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Copyright.html">版权声明</a>
+    <div class="separator"></div> <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html">关于我</a>
+  </nav>
+</footer>
+
+<body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x52a535);
+    document.body.appendChild(renderer.domElement);
+
+    const textureLoader = new THREE.TextureLoader();
+
+    const materialTop = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Top.webp')
+    });
+    const materialBottom = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Bottom.webp')
+    });
+    const materialFront = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Side.webp')
+    });
+    const materialBack = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Side.webp')
+    });
+    const materialLeft = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Side.webp')
+    });
+    const materialRight = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://wywdyx.github.io/Repository-Public/Image/Side.webp')
+    });
+
+    const materials = [
+      materialRight,
+      materialLeft,
+      materialTop,
+      materialBottom,
+      materialFront,
+      materialBack
+    ];
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const cube = new THREE.Mesh(geometry, materials);
+    cube.receiveShadow = true;
+    cube.castShadow = true;
+    scene.add(cube);
+
+    const light = new THREE.AmbientLight(0xffffff, 0.5);
+    const pointLight = new THREE.PointLight(0xffffff, 1.2);
+    pointLight.position.set(2, 3, 4);
+    pointLight.castShadow = true;
+    pointLight.shadow.mapSize.width = 1024;
+    pointLight.shadow.mapSize.height = 1024;
+    scene.add(light, pointLight);
+
+    camera.position.z = 3;
+    cube.position.x = 0.0;
+    cube.position.y = -0.0;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    window.addEventListener('resize', onWindowResize, false);
+
+    animate();
+  </script>
+  <script src="https://wywdyx.github.io/SITE/JavaScript/Loading.js"></script>
+
+
+</body>
+
+</html>

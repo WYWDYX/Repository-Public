@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chat彬彬</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://wywdyx.github.io/Repository-Public/css/style.css">
+</head>
+
+<body>
+  <div class="mask"></div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10000 10000" id="OpeningScreenIcon">
+    <path d="M 3000,7000 L 3000,3000 L 7000,3000" stroke="#ffffff" stroke-width="1000" stroke-linecap="round" />
+    <path d="M 3000,3000 L 5000,3000 L 5000,5000 L 3000,5000 Z" fill="#ffffff" />
+    <path d="M 4500,3000 L 5500,3000 L 5500,4000 L 4500,4000 Z" fill="#1E88E5" />
+    <line x1="5000" y1="5000" x2="7000" y2="7000" stroke="#ffffff" stroke-width="1000" stroke-linecap="round" />
+    <path d="M 7000,7000 L 5000,7000 L 5000,5000 L 7000,5000" stroke="#ffffff" stroke-width="1000"
+      stroke-linecap="round" />
+    <path d="M 5000,5500 L 6000,5500 L 6000,4500 L 5000,4500 Z" fill="#1E88E5" />
+  </svg>
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <h1>Chat彬彬</h1>
+      </div>
+    </header>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <div class="msg-img" style="background-image: url(https://wywdyx.github.io/Repository-Public/Image/BINBIN.jpg)">
+        </div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">Chat彬彬</div>
+            <div class="msg-info-time" id="time">12:45</div>
+          </div>
+
+          <div class="msg-text">
+            (｢･ω･)｢嘿, 欢迎来到Chat彬彬! 请直接发送消息给我吧。
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" placeholder="输入内容开始聊天">
+      <button type="submit" class="msger-send-btn">发送</button>
+    </form>
+  </section>
+  <script src="https://wywdyx.github.io/Repository-Public/JavaScript/ChatBINBIN-Script.js"></script>
+  <script>
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+    document.getElementById('time').textContent = timeString;
+  </script>
+</body>
+
+</html>
