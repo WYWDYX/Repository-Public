@@ -13,7 +13,9 @@
       padding: 0;
       overflow: hidden;
       height: 100%;
-      background-color: #52a535;
+      background: linear-gradient(-45deg, #31ce31, #00ff00, #31ce31, #00ff00, #31ce31);
+      background-size: 200% 200%;
+      animation: gradient 8s ease infinite;
     }
 
     canvas {
@@ -121,11 +123,15 @@
 
     @keyframes gradient {
       0% {
-        background-position: 0% 50%;
+        background-position: 0 12%;
+      }
+
+      50% {
+        background-position: 100% 100%;
       }
 
       100% {
-        background-position: 100% 50%;
+        background-position: 0 12%;
       }
     }
 
@@ -176,9 +182,13 @@
       1000
     );
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      precision: 'highp',
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x52a535);
+    renderer.setClearColor(0x000000, 0.0);
     document.body.appendChild(renderer.domElement);
 
     const textureLoader = new THREE.TextureLoader();
