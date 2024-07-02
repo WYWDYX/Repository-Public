@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>启始</title>
+    <link rel="icon" href="https://wywdyx.github.io/SITE/LOGO/Logo - Circular.svg" sizes="16x16">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft-YaHei";
+        }
+
+        body {
+            background-color: #1a1b1e;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        header {
+            margin: 0 48px;
+            width: calc(100vw - 96px);
+            height: 88px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin: 0 38px 0 -6px;
+        }
+
+        .logo:hover {
+            background-color: #575858;
+            border-radius: 50px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            margin-right: 16px;
+            text-decoration: none;
+            color: #D2D2D2;
+            border-radius: 50px;
+        }
+
+        nav a:hover {
+            background-color: #575858;
+        }
+
+        nav a svg {
+            width: 26px;
+            height: 26px;
+            margin: 12px;
+        }
+
+        .cta {
+            background-color: #0071E3;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .cta:hover {
+            background-color: #1c76ff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        .cta svg {
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        #padding {
+            height: 48vh;
+        }
+
+        #Background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+        }
+
+        #Background-image.opacity-- {
+            animation: opacity-- 1s ease;
+        }
+
+        #Background-image.opacity- {
+            animation: opacity- 1s ease;
+        }
+
+        #Masks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(to top, rgba(26, 27, 30, 1) 0%, rgba(26, 27, 30, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        #tag-1 {
+            font-size: 15px;
+            padding: 0 0 20px 0;
+            margin: 0 0 0 48px;
+        }
+
+        .Parent-container {
+            margin: 0 0 36px 48px;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
+        .Parent-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .Subcontainer {
+            width: 240px;
+            height: 240px;
+            margin: 0 12px 0 0;
+            background-color: #a7a7a7;
+            display: inline-block;
+            box-sizing: border-box;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .Subcontainer img {
+            width: 240px;
+            height: 240px;
+            border-radius: 5px;
+        }
+
+        .Subcontainer h2 {
+            position: absolute;
+            bottom: -3px;
+            color: #e7e7e7;
+            width: 100%;
+            text-align: center;
+            text-shadow: 1px 1px 1px #fff, -1px -1px 1px #000;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .Subcontainer a {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 240px;
+            height: 240px;
+        }
+
+        #Sweep-the-light::after {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+            animation: Sweep-the-light 3s infinite;
+            transform: translateX(-100%);
+        }
+
+        .JQQD {
+            text-align: center;
+            font-weight: 900;
+            position: absolute;
+            transform: translateY(100px);
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 24px;
+            background-image: -webkit-linear-gradient(left, #575858, #a7a7a7 25%, #575858 50%, #a7a7a7 75%, #575858);
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: masked-animation 4s infinite linear;
+            text-shadow: 0px 1px 0px #c0c0c015,
+                0px 2px 0px #b0b0b025,
+                0px 3px 0px #a0a0a02f,
+                0px 4px 0px #90909000,
+                0px 5px 10px rgba(0, 0, 0, 0.356);
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            padding: 0 54px;
+            background-color: #000;
+        }
+
+        #Inside-footer {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-section p {
+            padding: 36px 0 4px 0;
+            color: #a7a7a7;
+            font-size: 15px;
+        }
+
+        .footer-section p:hover {
+            color: #ffffff;
+        }
+
+        .footer-section a {
+            padding: 8px 0;
+            width: 15vw;
+            text-decoration: none;
+            color: #a7a7a7;
+            font-size: 11px;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        #Bottom-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            font-size: 11px;
+            color: #a7a7a7;
+            padding: 30px 0 16px 0;
+        }
+
+        #Bottom-footer div:hover {
+            color: #FFFFFF;
+        }
+
+        @font-face {
+            font-family: 'Microsoft-YaHei';
+            src: url('https://wywdyx.github.io/SITE/Font/Microsoft-YaHei.ttf') format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @keyframes Sweep-the-light {
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes opacity-- {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes opacity- {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes masked-animation {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10000 10000">
+                <circle cx="5000" cy="5000" r="4500" fill="#1E88E500" />
+                <path d="M 3000,7000 L 3000,3000 L 7000,3000" stroke="#ffffff" stroke-width="1000"
+                    stroke-linecap="round" />
+                <path d="M 3000,3000 L 5000,3000 L 5000,5000 L 3000,5000 Z" fill="#ffffff" />
+                <path d="M 4500,3000 L 5500,3000 L 5500,4000 L 4500,4000 Z" fill="#1E88E5" />
+                <line x1="5000" y1="5000" x2="7000" y2="7000" stroke="#ffffff" stroke-width="1000"
+                    stroke-linecap="round" />
+                <path d="M 7000,7000 L 5000,7000 L 5000,5000 L 7000,5000" stroke="#ffffff" stroke-width="1000"
+                    stroke-linecap="round" />
+                <path d="M 5000,5500 L 6000,5500 L 6000,4500 L 5000,4500 Z" fill="#1E88E5" />
+            </svg>
+        </div>
+        <nav>
+            <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=../index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207l-5-5-5 5V13.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7.207Z" />
+                </svg>
+            </a>
+            <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Music.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vinyl"
+                    viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM4 8a4 4 0 1 1 8 0 4 4 0 0 1-8 0z" />
+                    <path d="M9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+            </a>
+            <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Web.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-window-stack" viewBox="0 0 16 16">
+                    <path
+                        d="M4.5 6a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM6 6a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z" />
+                    <path
+                        d="M12 1a2 2 0 0 1 2 2 2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10ZM2 12V5a2 2 0 0 1 2-2h9a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1Zm1-4v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8H3Zm12-1V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2h12Z" />
+                </svg>
+            </a>
+            <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html" class="cta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+            </a>
+        </nav>
+    </header>
+    <div id="padding"></div>
+    <img id="Background-image" style="background-color: #1E88E5;"
+        src="https://wywdyx.github.io/SITE/LOGO/About Us - Frameless.svg" class="Background-img">
+    <img id="Background-image" style="display: none;width: 100vh;margin: 0 0 0 calc(50vw - 50vh);"
+        src="https://wywdyx.github.io/Repository-Public/Image/cat.jpg" class="国督CAT-b">
+    <img id="Background-image" style="display: none;width: 100vh;margin: 0 0 0 calc(50vw - 50vh);"
+        src="https://wywdyx.github.io/Repository-Public/Image/BINBIN.jpg" class="Chat冰冰-b">
+    <img id="Background-image"
+        style="display: none;width: 100vh;margin: 0 0 0 calc(50vw - 50vh);background-color: #ffffff;"
+        src="https://wywdyx.github.io/Repository-Public/Image/monkey.png" class="浩楠MONKEY-b">
+    <div id="Masks"></div>
+    <div id="tag-1">
+        <h1>开始玩</h1>
+    </div>
+    <div class="Parent-container">
+        <div class="Subcontainer">
+            <img src="https://wywdyx.github.io/Repository-Public/Image/cat.jpg" class="国督CAT">
+            <a href="https://wywdyx.github.io/Repository-Public/Web/Loading-GUODUCAT.html" data-bg="国督CAT-b"></a>
+            <div id="Sweep-the-light"></div>
+        </div>
+        <div class="Subcontainer">
+            <img src="https://wywdyx.github.io/Repository-Public/Image/BINBIN.jpg" class="Chat冰冰">
+            <h2>ChatBINBIN</h2>
+            <a href="https://wywdyx.github.io/Repository-Public/Web/Loading.html?referrer=../ChatBINBIN/index.html"
+                data-bg="Chat冰冰-b"></a>
+        </div>
+        <div class="Subcontainer">
+            <img style="background-color: #ffffff;" src="https://wywdyx.github.io/Repository-Public/Image/monkey.png"
+                class="浩楠MONKEY">
+            <h2 style=" writing-mode: vertical-lr;top: 0;">HAONANMONKEY</h2>
+            <a href="https://wywdyx.github.io/Repository-Public/Web/Loading.html?referrer=../HAONANMONKEY/index.html"
+                data-bg="浩楠MONKEY-b"></a>
+        </div>
+        <div class="Subcontainer" style="background-color: #000;">
+            <p class="JQQD">敬请期待</p>
+        </div>
+    </div>
+    <footer>
+        <div id="Inside-footer">
+            <div class="footer-section">
+                <p>关于网站</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=OnSite.html">关于网站</a>
+            </div>
+            <div class="footer-section">
+                <p>网站</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=../index.html">主页</a>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Web.html">网站</a>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html">加载中</a>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=SiteMap.html">网站地图</a>
+            </div>
+            <div class="footer-section">
+                <p>关于我们</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html">关于我</a>
+            </div>
+            <div class="footer-section">
+                <p>音乐</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Music.html">音乐</a>
+            </div>
+            <div class="footer-section">
+                <p>隐私</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Privacy.html">隐私政策</a>
+            </div>
+            <div class="footer-section">
+                <p>版权</p>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Copyright.html">版权声明</a>
+            </div>
+        </div>
+        <div id="Bottom-footer">
+            <div>简体中文(中国)</div>
+            <div>© 2024 吴栋。保留所有权利。</div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const subcontainers = document.querySelectorAll('.Subcontainer a');
+        subcontainers.forEach(a => {
+            a.addEventListener('mouseenter', function () {
+                const bgId = this.getAttribute('data-bg');
+                document.querySelectorAll('.Background-image').forEach(img => {
+                    img.style.display = 'none';
+                    img.classList.remove('opacity--');
+                    img.classList.remove('opacity-');
+                });
+                const targetImg = document.getElementsByClassName(bgId)[0];
+                targetImg.style.display = 'block';
+                setTimeout(() => {
+                    targetImg.classList.add('opacity--');
+                }, 0);
+                setTimeout(() => {
+                    targetImg.classList.remove('opacity--');
+                }, 1000);
+            });
+
+            a.addEventListener('mouseleave', function () {
+                const bgId = this.getAttribute('data-bg');
+                const targetImg = document.getElementsByClassName(bgId)[0];
+                setTimeout(() => {
+                    targetImg.classList.add('opacity-');
+                }, 0);
+                setTimeout(() => {
+                    targetImg.classList.remove('opacity-');
+                    targetImg.style.display = 'none';
+                }, 1000);
+            });
+        });
+    });
+</script>
+
+</html>
