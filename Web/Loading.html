@@ -257,7 +257,17 @@
     animate();
   </script>
 
-  <script src="https://wywdyx.github.io/SITE/JavaScript/Loading.js">
+  <script>
+    function redirectToPage(pageName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const referrer = urlParams.get('referrer');
+
+      if (referrer && referrer === pageName) {
+        setTimeout(() => {
+          window.location.href = pageName;
+        }, 5000);
+      }
+    }
     redirectToPage('../ChatBINBIN/index.html');
     redirectToPage('../HAONANMONKEY/index.html');
   </script>
