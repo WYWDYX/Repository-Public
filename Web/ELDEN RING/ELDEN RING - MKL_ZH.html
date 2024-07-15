@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elden Ring</title>
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      background-image: url(https://wywdyx.github.io/Repository-Public/Image/Shadow%20of%20the%20Erdtree.webp);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+
+    ::selection {
+      background-color: #ffffff81;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #fce564, #FFD700);
+      clip-path: polygon(0 0, 36% 0, 18% 100%, 0 100%);
+    }
+
+    #stars {
+      margin: 0 auto;
+      max-width: 1600px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .star {
+      display: block;
+      width: 1px;
+      background: transparent;
+      position: relative;
+      opacity: 0;
+      animation: star-fall 3s linear infinite;
+      -webkit-animation: star-fall 3s linear infinite;
+      -moz-animation: star-fall 3s linear infinite;
+    }
+
+    .star:after {
+      content: '';
+      display: block;
+      border: 0px solid #fff;
+      border-width: 0px 90px 2px 90px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 1);
+      box-shadow: 0 0 20px 0 rgba(255, 255, 255, .1);
+      transform: rotate(-45deg) translate3d(1px, 3px, 0);
+      -webkit-transform: rotate(-45deg) translate3d(1px, 3px, 0);
+      -moz-transform: rotate(-45deg) translate3d(1px, 3px, 0);
+      transform-origin: 0% 100%;
+      -webkit-transform-origin: 0% 100%;
+      -moz-transform-origin: 0% 100%;
+    }
+
+    .title-container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 50vh;
+      animation: titleAnimation 1.3s ease-in-out 1;
+      background-color: #ffffffc0;
+    }
+
+    .title {
+      font-size: 48px;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(255, 223, 0, 0.3);
+      background-image: linear-gradient(45deg, #FFD700 0%, #f8e15c 74%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .title:hover {
+      transform: scale(1.03);
+    }
+
+    .title span {
+      display: inline-block;
+      transition: text-shadow 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .glow {
+      text-shadow: 0 0 1px #ff0, 0 0 2px #ff0, 0 0 3px #ff0;
+      transform: scale(1.2);
+    }
+
+    #MKL {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      /* left: 0; */
+      right: -100%;
+      height: 330%;
+      width: auto;
+    }
+
+    #preload {
+      z-index: 1000;
+      width: 100%;
+      background: #1E1E1E;
+      transition: opacity .3s;
+    }
+
+    #preload span {
+      display: block;
+      bottom: 10px;
+      height: 10px;
+      width: 5%;
+      position: fixed;
+      background: #FFD700;
+      z-index: 1001;
+      display: inline-block;
+      margin: 0 2px;
+      animation: preload 5s infinite cubic-bezier(0.030, 0.615, 0.995, 0.415);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    #preload span:nth-child(1) {
+      animation-delay: 0.5s;
+      border-radius: 2.5vw 0 0 2.5vw;
+    }
+
+    #preload span:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    #preload span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    #preload span:nth-child(4) {
+      animation-delay: 0.2s;
+    }
+
+    #preload span:nth-child(5) {
+      animation-delay: 0.1s;
+    }
+
+    #preload span:nth-child(6) {
+      animation-delay: 0;
+      border-radius: 0 2.5vw 2.5vw 0;
+    }
+
+    @media (min-aspect-ratio: 4666/2625) {
+      body {
+        background-size: 100% auto;
+      }
+    }
+
+    @media (max-aspect-ratio: 4666/2625) {
+      body {
+        background-size: auto 100%;
+      }
+    }
+
+    @keyframes titleAnimation {
+      0% {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 32px;
+      }
+    }
+
+    @keyframes preload {
+      1% {
+        left: -10%;
+        opacity: 1;
+      }
+
+      60% {
+        left: 110%;
+        opacity: 1;
+      }
+
+      61% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes star-fall {
+      0% {
+        opacity: 0;
+        transform: scale(0.5) translate3d(0, 0, 0);
+        -webkit-transform: scale(0.5) translate3d(0, 0, 0);
+        -moz-transform: scale(0.5) translate3d(0, 0, 0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate3d(-200px, 200px, 0);
+        -webkit-transform: translate3d(-200px, 200px, 0);
+        -moz-transform: translate3d(-200px, 200px, 0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.2) translate3d(-300px, 300px, 0);
+        -webkit-transform: scale(1.2) translate3d(-300px, 300px, 0);
+        -moz-transform: scale(1.2) translate3d(-300px, 300px, 0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"></div>
+  <div id="stars">
+    <div class="star" style="top: 0px;left: 500px;"></div>
+  </div>
+  <div class="title-container">
+    <h1 class="title" data-text="我向你发誓  ─会遵循温柔的法则，开始千年的旅程。">我向你发誓 ─会遵循温柔的法则，开始千年的旅程。</h1>
+    <svg id="MKL" width="1400" height="4000" viewBox="0 0 1400 4000" xmlns="http://www.w3.org/2000/svg">
+      <!-- 定义金色样式 -->
+      <style>
+        .gold {
+          fill: none;
+          stroke: gold;
+          stroke-width: 5;
+        }
+
+        text {
+          font-family: "SimSun";
+        }
+      </style>
+
+      <!-- 定义尖头标记 -->
+      <defs>
+        <!-- 终点尖头 -->
+        <marker id="arrowhead-end" markerWidth="25" markerHeight="25" refX="0" refY="12.5" orient="auto">
+          <path d="M 0 12 L 25 12.5 L 0 13 Z" fill="gold" />
+        </marker>
+        <!-- 起点尖头 -->
+        <marker id="arrowhead-start" markerWidth="25" markerHeight="25" refX="25" refY="12.5" orient="auto">
+          <path d="M 25 12 L 0 12.5 L 25 13 Z" fill="gold" />
+        </marker>
+        <!-- 终点尖头-path -->
+        <marker id="arrowhead-end-path" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto">
+          <path d="M 0 2 L 5 2.5 L 0 3 Z" fill="gold" />
+        </marker>
+        <!-- 起点尖头-path -->
+        <marker id="arrowhead-start-path" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+          <path d="M 5 2 L 0 2.5 L 5 3 Z" fill="gold" />
+        </marker>
+      </defs>
+
+      <g transform="translate(0, 250)">
+        <!-- 绘制四分之三圆环 -->
+        <path class="gold" d="M500,50 
+                                A450,450 0 1,1 50,500 
+                                A329.3,329.3 0 1,0 500" marker-start="url(#arrowhead-start-path)"
+          marker-end="url(#arrowhead-end-path)" />
+      </g>
+
+      <!-- 绘制竖着的十字 -->
+      <line x1="750" y1="125" x2="750" y2="3875" class="gold" marker-start="url(#arrowhead-start)"
+        marker-end="url(#arrowhead-end)" />
+      <line x1="575" y1="750" x2="800" y2="750" class="gold" marker-start="url(#arrowhead-start)"
+        marker-end="url(#arrowhead-end)" />
+
+      <!-- 定义长方形 -->
+      <!-- <rect x="-10" y="3650" width="1420" height="200" fill="#191914" stroke="#364041" stroke-width="5"/> -->
+
+      <!-- 定义文本 -->
+      <!-- <text x="700" y="3900" font-family="Arial" font-size="40" fill="#FFFFFF" text-anchor="middle"> -->
+      <!-- <tspan x="700" dy="-165">刻下的话语，浮现心头：</tspan> -->
+      <!-- <tspan x="700" dy="50">“将我初次舍去的躯体，弃置于此。”</tspan> -->
+      <!-- </text> -->
+    </svg>
+    <!-- 米凯拉的十字标记 -->
+    <!-- © 2024 吴栋。保留所有权利。本作品受中华人民共和国著作权法及国际著作权法保护。 -->
+    <!--  -->
+    <!-- 未经版权所有人的事先书面授权，任何人不得以任何方式使用本作品，包括但不限于复制、转载、修改、发布、发行、展示或演示该作品。 -->
+    <!--  -->
+    <!-- 任何未经授权的使用行为均构成对版权所有人的侵犯，版权所有人将保留依法追究其法律责任的权利。 -->
+    <!--  -->
+    <!-- GitHub账号: https://github.com/WYWDYX -->
+    <!--  -->
+    <!-- BiliBili帐号: https://space.bilibili.com/1220763338 -->
+  </div>
+  <div id="preload">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</body>
+<script>
+  var stars = document.getElementById('stars')
+
+  for (var j = 0; j < 100; j++) {
+    var newStar = document.createElement("div");
+    newStar.className = "star";
+    newStar.style.top = randomDistance(500, -100) + 'px';
+    newStar.style.left = randomDistance(1300, 300) + 'px';
+    stars.appendChild(newStar);
+  }
+
+  function randomDistance(max, min) {
+    var distance = Math.floor(Math.random() * (max - min + 1) + min)
+    return distance
+  }
+
+  var star = document.getElementsByClassName('star')
+
+  for (var i = 0, len = star.length; i < len; i++) {
+    star[i].style.animationDelay = i % 6 == 0 ? '0s' : i * 0.8 + 's'
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var element = document.getElementById('MKL');
+
+    function updatePosition() {
+      var right = window.innerHeight * 3.3 / 4000 * 400;
+      element.style.right = '-' + right + 'px';
+    }
+
+    updatePosition();
+
+    window.addEventListener('resize', updatePosition);
+  });
+</script>
+
+<script>
+  var titleElement = document.querySelector('.title');
+  var text = titleElement.getAttribute('data-text');
+  var chars = text.split('');
+  var spans = chars.map(function (char) {
+    return '<span>' + (char === ' ' ? '&thinsp;' : char) + '</span>';
+  });
+  titleElement.innerHTML = spans.join('');
+
+  document.addEventListener('mousemove', function (e) {
+    var spans = titleElement.querySelectorAll('span');
+    spans.forEach(function (span) {
+      span.classList.remove('glow');
+    });
+    spans.forEach(function (span) {
+      var rect = span.getBoundingClientRect();
+      if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        span.classList.add('glow');
+      }
+    });
+  });
+
+  function addGlowToSpans(spans, duration) {
+    let current = 0;
+    const interval = duration / spans.length;
+    spans.forEach((span, index) => {
+      setTimeout(() => {
+        spans.forEach(s => s.classList.remove('glow'));
+        span.classList.add('glow');
+      }, index * interval);
+    });
+  }
+
+  function initTitleAnimation() {
+    const titleElement = document.querySelector('.title');
+    if (!titleElement) return;
+
+    const oaths = [
+      { text: '米凯拉 - 1', duration: 10000 },
+      { text: '哥哥。', duration: 10000 },
+      { text: '我一定会成为神祇。', duration: 10000 },
+      { text: '所以说，如果我们实现约定，', duration: 10000 },
+      { text: '请你成为我的王。', duration: 10000 },
+      { text: '……我想打造一个温柔的世界。', duration: 10000 },
+
+      { text: '米凯拉 - 2', duration: 10000 },
+      { text: '我的锋刃，以及祭典的英雄啊。', duration: 10000 },
+      { text: '你们奋战的轨迹，将被永世传唱。', duration: 10000 },
+      { text: '如今约定履行，强大灵魂即将归来──', duration: 10000 },
+      { text: '成为我的王。', duration: 10000 },
+
+      { text: '米凯拉 - 3', duration: 10000 },
+      { text: '……哥哥。', duration: 10000 },
+      { text: '你终于回来了。', duration: 10000 },
+
+      { text: '米凯拉 - 4', duration: 10000 },
+      { text: '我在此宣誓：', duration: 10000 },
+      { text: '所有的生命，所有的灵魂啊，', duration: 10000 },
+      { text: '接下来即将迈入乐园时代──', duration: 10000 },
+      { text: '将遵循温柔的法则，开始千年的旅程。', duration: 10000 },
+      { text: '众生啊，唯独思考爱吧──', duration: 10000 },
+
+      { text: '米凯拉 - 5', duration: 10000 },
+      { text: '……褪色者啊。', duration: 10000 },
+      { text: '老旧律法之王啊。', duration: 10000 },
+      { text: '那不因人、不因事排拒，也不问罪过的存在。', duration: 10000 },
+      { text: '如果你对罪孽知情，并为世界烦忧──', duration: 10000 },
+      { text: '我将怀抱众生万物。', duration: 10000 },
+      { text: '就请你让出路来。', duration: 10000 },
+
+      { text: '米凯拉 - 6', duration: 10000 },
+      { text: '……一起走吧。', duration: 10000 },
+      { text: '拉塔恩──我约定的王啊。', duration: 10000 },
+
+      { text: '米凯拉 - 7', duration: 10000 },
+      { text: '那条路由我米凯拉──', duration: 10000 },
+      { text: '以及我约定的王，拉塔恩前行。', duration: 10000 },
+
+      { text: '米凯拉 - 8', duration: 10000 },
+      { text: '老旧律法之王啊，', duration: 10000 },
+      { text: '一起来吧。', duration: 10000 },
+      { text: '你也一起来吧。', duration: 10000 },
+
+      { text: '米凯拉 - 9', duration: 10000 },
+      { text: '我向你发誓──', duration: 10000 },
+      { text: '会遵循温柔的法则，开始千年的旅程。', duration: 10000 },
+      { text: '让你的思绪充满爱吧。', duration: 10000 }
+    ];
+
+    let oathIndex = 0;
+
+    function changeTitleContent() {
+      titleElement.innerHTML = '';
+      const oath = oaths[oathIndex];
+      const spans = oath.text.split('').map(function (char) {
+        return '<span>' + (char === ' ' ? '&thinsp;' : char) + '</span>';
+      }).join('');
+      titleElement.innerHTML = spans;
+
+      const newSpans = titleElement.querySelectorAll('span');
+      addGlowToSpans(newSpans, oath.duration);
+
+      oathIndex = (oathIndex + 1) % oaths.length;
+      setTimeout(changeTitleContent, oath.duration);
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          const spans = titleElement.querySelectorAll('span');
+          const oath = oaths[oathIndex];
+          addGlowToSpans(spans, oath.duration);
+        }
+      });
+    });
+
+    const config = { childList: true, subtree: true };
+
+    observer.observe(titleElement, config);
+
+    changeTitleContent();
+  }
+
+  initTitleAnimation();
+</script>
+
+</html>
