@@ -80,6 +80,10 @@
       background-color: #ffffffc0;
     }
 
+    .title-container:hover {
+      background-color: #ffffffda;
+    }
+
     .title {
       font-size: 48px;
       color: #333;
@@ -96,6 +100,7 @@
 
     .title:hover {
       transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .title span {
@@ -167,13 +172,13 @@
       border-radius: 0 2.5vw 2.5vw 0;
     }
 
-    @media (min-aspect-ratio: 4666/2625) {
+    @media (min-aspect-ratio: 13331/7499) {
       body {
         background-size: 100% auto;
       }
     }
 
-    @media (max-aspect-ratio: 4666/2625) {
+    @media (max-aspect-ratio: 13331/7499) {
       body {
         background-size: auto 100%;
       }
@@ -382,9 +387,10 @@
     });
   });
 
+  const interval = 666;
+
   function addGlowToSpans(spans, duration) {
     let current = 0;
-    const interval = duration / spans.length;
     spans.forEach((span, index) => {
       setTimeout(() => {
         spans.forEach(s => s.classList.remove('glow'));
@@ -398,55 +404,55 @@
     if (!titleElement) return;
 
     const oaths = [
-      { text: '米凯拉 - 1', duration: 10000 },
-      { text: '哥哥。', duration: 10000 },
-      { text: '我一定会成为神祇。', duration: 10000 },
-      { text: '所以说，如果我们实现约定，', duration: 10000 },
-      { text: '请你成为我的王。', duration: 10000 },
-      { text: '……我想打造一个温柔的世界。', duration: 10000 },
+      { text: '米凯拉 - 1' },
+      { text: '哥哥。' },
+      { text: '我一定会成为神祇。' },
+      { text: '所以说，如果我们实现约定，' },
+      { text: '请你成为我的王。' },
+      { text: '……我想打造一个温柔的世界。' },
 
-      { text: '米凯拉 - 2', duration: 10000 },
-      { text: '我的锋刃，以及祭典的英雄啊。', duration: 10000 },
-      { text: '你们奋战的轨迹，将被永世传唱。', duration: 10000 },
-      { text: '如今约定履行，强大灵魂即将归来──', duration: 10000 },
-      { text: '成为我的王。', duration: 10000 },
+      { text: '米凯拉 - 2' },
+      { text: '我的锋刃，以及祭典的英雄啊。' },
+      { text: '你们奋战的轨迹，将被永世传唱。' },
+      { text: '如今约定履行，强大灵魂即将归来──' },
+      { text: '成为我的王。' },
 
-      { text: '米凯拉 - 3', duration: 10000 },
-      { text: '……哥哥。', duration: 10000 },
-      { text: '你终于回来了。', duration: 10000 },
+      { text: '米凯拉 - 3' },
+      { text: '……哥哥。' },
+      { text: '你终于回来了。' },
 
-      { text: '米凯拉 - 4', duration: 10000 },
-      { text: '我在此宣誓：', duration: 10000 },
-      { text: '所有的生命，所有的灵魂啊，', duration: 10000 },
-      { text: '接下来即将迈入乐园时代──', duration: 10000 },
-      { text: '将遵循温柔的法则，开始千年的旅程。', duration: 10000 },
-      { text: '众生啊，唯独思考爱吧──', duration: 10000 },
+      { text: '米凯拉 - 4' },
+      { text: '我在此宣誓：' },
+      { text: '所有的生命，所有的灵魂啊，' },
+      { text: '接下来即将迈入乐园时代──' },
+      { text: '将遵循温柔的法则，开始千年的旅程。' },
+      { text: '众生啊，唯独思考爱吧──' },
 
-      { text: '米凯拉 - 5', duration: 10000 },
-      { text: '……褪色者啊。', duration: 10000 },
-      { text: '老旧律法之王啊。', duration: 10000 },
-      { text: '那不因人、不因事排拒，也不问罪过的存在。', duration: 10000 },
-      { text: '如果你对罪孽知情，并为世界烦忧──', duration: 10000 },
-      { text: '我将怀抱众生万物。', duration: 10000 },
-      { text: '就请你让出路来。', duration: 10000 },
+      { text: '米凯拉 - 5' },
+      { text: '……褪色者啊。' },
+      { text: '老旧律法之王啊。' },
+      { text: '那不因人、不因事排拒，也不问罪过的存在。' },
+      { text: '如果你对罪孽知情，并为世界烦忧──' },
+      { text: '我将怀抱众生万物。' },
+      { text: '就请你让出路来。' },
 
-      { text: '米凯拉 - 6', duration: 10000 },
-      { text: '……一起走吧。', duration: 10000 },
-      { text: '拉塔恩──我约定的王啊。', duration: 10000 },
+      { text: '米凯拉 - 6' },
+      { text: '……一起走吧。' },
+      { text: '拉塔恩──我约定的王啊。' },
 
-      { text: '米凯拉 - 7', duration: 10000 },
-      { text: '那条路由我米凯拉──', duration: 10000 },
-      { text: '以及我约定的王，拉塔恩前行。', duration: 10000 },
+      { text: '米凯拉 - 7' },
+      { text: '那条路由我米凯拉──' },
+      { text: '以及我约定的王，拉塔恩前行。' },
 
-      { text: '米凯拉 - 8', duration: 10000 },
-      { text: '老旧律法之王啊，', duration: 10000 },
-      { text: '一起来吧。', duration: 10000 },
-      { text: '你也一起来吧。', duration: 10000 },
+      { text: '米凯拉 - 8' },
+      { text: '老旧律法之王啊，' },
+      { text: '一起来吧。' },
+      { text: '你也一起来吧。' },
 
-      { text: '米凯拉 - 9', duration: 10000 },
-      { text: '我向你发誓──', duration: 10000 },
-      { text: '会遵循温柔的法则，开始千年的旅程。', duration: 10000 },
-      { text: '让你的思绪充满爱吧。', duration: 10000 }
+      { text: '米凯拉 - 9' },
+      { text: '我向你发誓──' },
+      { text: '会遵循温柔的法则，开始千年的旅程。' },
+      { text: '让你的思绪充满爱吧。' }
     ];
 
     let oathIndex = 0;
@@ -460,10 +466,11 @@
       titleElement.innerHTML = spans;
 
       const newSpans = titleElement.querySelectorAll('span');
-      addGlowToSpans(newSpans, oath.duration);
+      const duration = oath.text.length * interval;
+      addGlowToSpans(newSpans, duration);
 
       oathIndex = (oathIndex + 1) % oaths.length;
-      setTimeout(changeTitleContent, oath.duration);
+      setTimeout(changeTitleContent, duration);
     }
 
     const observer = new MutationObserver((mutations) => {
@@ -471,19 +478,244 @@
         if (mutation.type === 'childList') {
           const spans = titleElement.querySelectorAll('span');
           const oath = oaths[oathIndex];
-          addGlowToSpans(spans, oath.duration);
+          const duration = oath.text.length * interval;
+          addGlowToSpans(spans, duration);
         }
       });
     });
 
     const config = { childList: true, subtree: true };
-
     observer.observe(titleElement, config);
-
     changeTitleContent();
   }
 
-  initTitleAnimation();
+  initTitleAnimation()
+</script>
+
+<script>
+  const windowObj = window;
+  var showPopupStatus = false;
+
+  function showPopup() {
+    if (showPopupStatus) {
+      return;
+    }
+    if (localStorage.getItem('dontShowPopup') === 'true') {
+      return;
+    }
+
+    const popupDiv = document.createElement('div');
+    popupDiv.style.position = 'fixed';
+    popupDiv.style.top = '0';
+    popupDiv.style.left = '0';
+    popupDiv.style.width = '100%';
+    popupDiv.style.height = '100%';
+    popupDiv.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+    popupDiv.style.display = 'flex';
+    popupDiv.style.flexDirection = 'column';
+    popupDiv.style.alignItems = 'center';
+    popupDiv.style.justifyContent = 'space-around';
+    popupDiv.style.zIndex = '1000';
+
+    const textH1 = document.createElement('h1');
+    textH1.textContent = '本网页暂不推荐在屏幕宽度小于高度的情况下使用';
+    textH1.style.fontFamily = "'Cormorant Garamond', serif";
+    textH1.style.fontSize = '35px';
+    textH1.style.padding = '8px 16px';
+    textH1.style.background = 'linear-gradient(45deg, #FFD700 0%, #f8e15c 74%)';
+    textH1.style.backgroundClip = 'text';
+    textH1.style.webkitBackgroundClip = 'text';
+    textH1.style.webkitTextFillColor = 'transparent';
+    textH1.style.textAlign = 'center';
+
+    const inputDiv = document.createElement('div');
+    inputDiv.style.display = 'flex';
+    inputDiv.style.alignItems = 'center';
+    inputDiv.style.margin = '10px';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'dontShowPopup';
+    checkbox.className = 'custom-checkbox';
+    checkbox.style.marginRight = '10px';
+
+    const label = document.createElement('label');
+    label.htmlFor = 'dontShowPopup';
+    label.textContent = '永不提示';
+    label.className = 'custom-checkbox-label';
+
+    const checkboxStyle = `
+      .custom-checkbox {
+        cursor: pointer;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #ccc;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .custom-checkbox:hover {
+        transform: scale(1.02);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .custom-checkbox:checked {
+        background-color: #FFD700;
+        border-color: #FFD700;
+      }
+
+      .custom-checkbox-label {
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-family: '黑体';
+        user-select: none;
+      }
+    `;
+
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.textContent = checkboxStyle;
+    document.head.appendChild(style);
+
+    inputDiv.appendChild(checkbox);
+    inputDiv.appendChild(label);
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = '我已了解';
+    closeButton.style.fontFamily = "'Cormorant Garamond', serif";
+    closeButton.style.border = 'none';
+    closeButton.style.backgroundColor = '#FFE244';
+    closeButton.style.width = '25vw';
+    closeButton.style.color = '#FFFFFF';
+    closeButton.style.padding = '8px 16px';
+    closeButton.style.borderRadius = '5px';
+    closeButton.style.textTransform = 'uppercase';
+    closeButton.style.fontWeight = 'bold';
+    closeButton.style.textDecoration = 'none';
+    closeButton.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+    closeButton.style.transition = 'all 0.2s ease-in-out';
+
+    closeButton.onmouseover = function () {
+      this.style.backgroundColor = '#FFD700';
+      this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+      this.style.transform = 'scale(1.02)';
+    };
+
+    closeButton.onmouseout = function () {
+      this.style.backgroundColor = '#FFE244';
+      this.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+      this.style.transform = 'scale(1)';
+    };
+
+    closeButton.addEventListener('click', function () {
+      if (checkbox.checked) {
+        localStorage.setItem('dontShowPopup', 'true');
+      }
+      popupDiv.remove();
+      showPopupStatus = true;
+    });
+
+    popupDiv.appendChild(textH1);
+    popupDiv.appendChild(inputDiv);
+    popupDiv.appendChild(closeButton);
+
+    document.body.appendChild(popupDiv);
+  }
+
+  windowObj.addEventListener('resize', function () {
+    const screenWidth = windowObj.innerWidth;
+    const screenHeight = windowObj.innerHeight;
+    if (screenWidth < screenHeight && !showPopupStatus) {
+      showPopup();
+      showPopupStatus = true;
+    } else {
+      const popup = document.querySelector('div[style*="position: fixed"]');
+      if (popup) {
+        popup.remove();
+        showPopupStatus = false;
+      }
+    }
+  });
+
+  const initialScreenWidth = windowObj.innerWidth;
+  const initialScreenHeight = windowObj.innerHeight;
+  if (initialScreenWidth < initialScreenHeight && !showPopupStatus) {
+    showPopup();
+    showPopupStatus = true;
+  }
+</script>
+
+<script>
+  const oaths = [
+    { text: '米凯拉 - 1' },
+    { text: '哥哥。' },
+    { text: '我一定会成为神祇。' },
+    { text: '所以说，如果我们实现约定，' },
+    { text: '请你成为我的王。' },
+    { text: '……我想打造一个温柔的世界。' },
+
+    { text: '米凯拉 - 2' },
+    { text: '我的锋刃，以及祭典的英雄啊。' },
+    { text: '你们奋战的轨迹，将被永世传唱。' },
+    { text: '如今约定履行，强大灵魂即将归来──' },
+    { text: '成为我的王。' },
+
+    { text: '米凯拉 - 3' },
+    { text: '……哥哥。' },
+    { text: '你终于回来了。' },
+
+    { text: '米凯拉 - 4' },
+    { text: '我在此宣誓：' },
+    { text: '所有的生命，所有的灵魂啊，' },
+    { text: '接下来即将迈入乐园时代──' },
+    { text: '将遵循温柔的法则，开始千年的旅程。' },
+    { text: '众生啊，唯独思考爱吧──' },
+
+    { text: '米凯拉 - 5' },
+    { text: '……褪色者啊。' },
+    { text: '老旧律法之王啊。' },
+    { text: '那不因人、不因事排拒，也不问罪过的存在。' },
+    { text: '如果你对罪孽知情，并为世界烦忧──' },
+    { text: '我将怀抱众生万物。' },
+    { text: '就请你让出路来。' },
+
+    { text: '米凯拉 - 6' },
+    { text: '……一起走吧。' },
+    { text: '拉塔恩──我约定的王啊。' },
+
+    { text: '米凯拉 - 7' },
+    { text: '那条路由我米凯拉──' },
+    { text: '以及我约定的王，拉塔恩前行。' },
+
+    { text: '米凯拉 - 8' },
+    { text: '老旧律法之王啊，' },
+    { text: '一起来吧。' },
+    { text: '你也一起来吧。' },
+
+    { text: '米凯拉 - 9' },
+    { text: '我向你发誓──' },
+    { text: '会遵循温柔的法则，开始千年的旅程。' },
+    { text: '让你的思绪充满爱吧。' }
+  ];
+
+  function printOathsInOrder() {
+    let index = 0;
+
+    function printNextOath() {
+      const oath = oaths[index];
+      console.clear();
+      console.log(oath.text);
+      index = (index + 1) % oaths.length;
+      setTimeout(printNextOath, oath.text.length * interval);
+    }
+
+    printNextOath();
+  }
+
+  printOathsInOrder();
 </script>
 
 </html>
