@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江国督の私密</title>
+    <link rel="icon" href="https://wywdyx.github.io/SITE/LOGO/Logo - Circular.svg" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #FM {
+            padding: 0;
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        .music-player {
+            width: 90%;
+            height: 75%;
+            max-width: 300px;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 25px 0 0 0;
+        }
+
+        #BT {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        #BT button {
+            color: rgb(0, 0, 0);
+            background-color: #00000000;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            font-size: 16px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #BT button:hover {
+            color: #3498db;
+            transform: scale(1.1);
+        }
+
+        #BT h3 {
+            color: #000000;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .controls button {
+            background-color: #00000000;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            font-size: 16px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls button:hover {
+            background-color: #3498db;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .controls button:focus {
+            outline: none;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            height: 5px;
+            margin: 15px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .progress {
+            background-color: #3498db;
+            width: 0;
+            height: 5px;
+            transition: width 0.1s;
+            border-radius: 5px;
+        }
+
+        .volume-control {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .volume-control input {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                max-width: 768px;
+                height: 100%;
+            }
+            h1 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="music-player">
+        <img id="FM" src="https://wywdyx.github.io/Repository-Public/Image/cat.jpg" alt="封面">
+        <div id="BT">
+            <h3>江国督の私密</h3>
+            <button id="downloadBtn"><i class="fas fa-download"></i></button>
+        </div>
+        <audio id="audio" src="江国督の私密.flac"></audio>
+
+        <div class="controls">
+            <button id="rewindBtn"><i class="fas fa-backward"></i></button>
+            <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+            <button id="forwardBtn"><i class="fas fa-forward"></i></button>
+        </div>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+    <h1>无歌词</h1>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressContainer = document.getElementById('progress-container');
+        const progress = document.getElementById('progress');
+        const volumeControl = document.getElementById('volume');
+        const rewindBtn = document.getElementById('rewindBtn');
+        const forwardBtn = document.getElementById('forwardBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        let isPlaying = false;
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        forwardBtn.addEventListener('click', () => {
+            audio.currentTime += 10;
+        });
+
+        rewindBtn.addEventListener('click', () => {
+            audio.currentTime -= 10;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = audio.src;
+            link.download = 'your-audio-file.mp3';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+</body>
+
+</html>

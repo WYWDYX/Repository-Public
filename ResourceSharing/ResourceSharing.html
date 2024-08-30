@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源分享网站</title>
+    <link rel="icon" href="https://wywdyx.github.io/SITE/LOGO/Logo - Circular.svg" sizes="16x16">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #0078d4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-image: -webkit-linear-gradient(left, #0091ff, #ffffff 25%, #0091ff 50%, #ffffff 75%, #0091ff);
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: masked-animation 4s infinite linear;
+            text-shadow: 0px 1px 0px #c0c0c015,
+                0px 2px 0px #b0b0b025,
+                0px 3px 0px #a0a0a02f,
+                0px 4px 0px #90909000,
+                0px 5px 10px rgba(0, 0, 0, 0.356);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.3);
+            filter: blur(10px);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            content: '';
+            background: inherit;
+            box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.3);
+            filter: blur(0.55px);
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #PT {
+            overflow: hidden;
+            position: relative;
+        }
+
+        #PT p {
+            position: absolute;
+            color: #ffffff;
+            background-color: #0078d4;
+            top: 0;
+            left: 0;
+            padding: 5px 25px 5px 5px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #TB {
+            overflow: hidden;
+            position: relative;
+        }
+
+        #TB span {
+            position: absolute;
+            color: #ffffff;
+            background-color: #ff0000;
+            top: 0;
+            right: 0;
+            padding: 5px 5px 5px 25px;
+            clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #TB p {
+            position: absolute;
+            color: #ffffff;
+            background-color: #0078d4;
+            top: 0;
+            left: 0;
+            padding: 5px 25px 5px 5px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #Sweep-the-light::after {
+            content: '';
+            position: absolute;
+            inset: -75%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+            animation: Sweep-the-light 3s infinite;
+            transform: translateX(-100%);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            margin: 0 0 10px 0;
+            color: #0078d4;
+        }
+
+        .card-description {
+            font-size: 1em;
+            margin: 0 0 15px 0;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .card a {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            font-weight: 900;
+            background-image: -webkit-linear-gradient(left, #0091ff, #41abfd 25%, #0091ff 50%, #41abfd 75%, #0091ff);
+            animation: masked-animation 4s infinite linear;
+            background-size: 200% 100%;
+            box-shadow: 0px 1px 0px #c0c0c015,
+                0px 2px 0px #b0b0b025,
+                0px 3px 0px #a0a0a02f,
+                0px 4px 0px #90909000,
+                0px 5px 10px rgba(0, 0, 0, 0.356);
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .card a:hover {
+            transform: scale(1.05);
+        }
+
+        .agreement {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .agreement-content {
+            background: white;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            overflow-y: auto;
+            max-height: 90%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .agreement h2 {
+            margin-top: 0;
+            color: #0078d4;
+        }
+
+        .agreement p {
+            margin: 10px 0;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .agreement label {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .agreement input {
+            margin-right: 10px;
+        }
+
+        .agreement button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #0078d4;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .agreement button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .agreement button:hover:enabled {
+            background-color: #005a9e;
+            transform: scale(1.02);
+        }
+
+        .gradient-overlay {
+            height: 100px;
+            background: linear-gradient(to bottom, #ffffff, #0078d4);
+            width: 100%;
+        }
+
+        footer {
+            background-color: #0078d4;
+        }
+
+        #footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: 0 auto;
+            padding: 10px 0;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        #footer div,
+        #footer nav {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #footer div {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        #footer nav {
+            gap: 24px;
+        }
+
+        #footer nav a {
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        #footer nav a:hover {
+            background-color: #005a9e;
+            color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #footer {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px 0;
+            }
+
+            #footer div {
+                margin-bottom: 12px;
+                text-align: center;
+                font-size: 15px;
+                opacity: 0.85;
+            }
+
+            #footer nav {
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+
+            #footer nav a {
+                font-size: 14px;
+                padding: 8px 16px;
+                text-decoration: underline;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes Sweep-the-light {
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes masked-animation {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>WD的资源分享网站</h1>
+    </header>
+
+    <div class="container">
+        <!-- 葬送的芙莉莲 主题曲 -->
+        <div class="card">
+            <div id="PT">
+                <img src="ZSDFLL-ZTQ.webp" alt="葬送的芙莉莲 主题曲">
+                <p>番剧</p>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">葬送的芙莉莲 主题曲</h2>
+                <p class="card-description">1080P画质 高码率 高质量音质 H264编码</p>
+                <a href="https://1drv.ms/a/s!Aq3Wv_CFGIEogit7Vi1VSHA3Dk5w?e=wVwMZE" target="_blank">在线观看/下载</a>
+            </div>
+        </div>
+
+        <!-- 葬送的芙莉莲 -->
+        <div class="card">
+            <div id="TB">
+                <img src="ZSDFLL.webp" alt="葬送的芙莉莲">
+                <div id="Sweep-the-light"></div>
+                <span>推荐</span>
+                <p>番剧</p>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">葬送的芙莉莲</h2>
+                <p class="card-description">4K画质 HDR真实色彩 高质量音质 H265编码</p>
+                <a href="https://1drv.ms/a/s!Aq3Wv_CFGIEogiqNW2aP54RSfiX3?e=OmOazd" target="_blank">在线观看/下载</a>
+            </div>
+        </div>
+
+        <!-- 女神异闻录5 动画版 -->
+        <div class="card">
+            <div id="PT">
+                <img src="NSYWL.webp" alt="女神异闻录5 动画版">
+                <p>番剧</p>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">女神异闻录5 动画版</h2>
+                <p class="card-description">1080P画质 高码率 高质量音质 H264编码</p>
+                <a href="https://1drv.ms/a/s!Aq3Wv_CFGIEogixwv4pwOP4usdM5?e=qlC8TU" target="_blank">在线观看/下载</a>
+            </div>
+        </div>
+
+        <!-- 江国督の私密 -->
+        <div class="card">
+            <div id="TB">
+                <img src="https://wywdyx.github.io/Repository-Public/Image/cat.jpg" alt="江国督の私密">
+                <div id="Sweep-the-light"></div>
+                <span>特别推荐</span>
+                <p>音乐</p>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">江国督の私密.FLAC</h2>
+                <p class="card-description">1012kbps比特率 超清无损音质 无修改母带 无需密码</p>
+                <a href="MusicPlayer.html" target="_blank">在线观看/下载</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用户协议 -->
+    <div class="agreement" id="agreement">
+        <div class="agreement-content">
+            <h2>用户协议</h2>
+            <p>以上所有资源都可以在线观看下载，并且没有任何下载限制，而且由于是photos.onedrive.com而非onedrive.live.com所以无需VPN，由于OneDrive是根据时间排序的，所以资源的顺序可能是错误的，请各位根据文件名来按顺序观看。如有缺少请在QQ群中向我汇报。
+            </p>
+            <p>注：严禁修改任何资源或其他内容，资源密码在QQ群中获取。</p>
+            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ymxGeMamZS9FIcmL_JrFexsc9LWMacyE&authKey=TfffaAdVZN6jGnow9VJmfuiEbMlunqaSA2jrK3i3sQh%2BItV74%2FWxY%2FfzBg8qwHtJ&noverify=0&group_code=565488400"
+                target="_blank">QQ群</a>
+            <label>
+                <input type="checkbox" id="agreeTerms1">
+                我已认真阅读并理解以上条款。
+            </label>
+            <label>
+                <input type="checkbox" id="agreeTerms2">
+                我同意不修改任何资源或其他内容。
+            </label>
+            <button id="confirmButton" disabled>同意并继续</button>
+        </div>
+    </div>
+
+    <div class="gradient-overlay"></div>
+    <footer>
+        <div id="footer">
+            <div>
+                © 2024 吴栋。保留所有权利。
+            </div>
+            <nav>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Privacy.html">隐私政策</a>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Copyright.html">版权声明</a>
+                <a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html">关于我</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        const checkbox1 = document.getElementById('agreeTerms1');
+        const checkbox2 = document.getElementById('agreeTerms2');
+        const confirmButton = document.getElementById('confirmButton');
+        const agreement = document.getElementById('agreement');
+        const container = document.querySelector('.container');
+        const footer = document.querySelector('footer');
+
+        function toggleButtonState() {
+            confirmButton.disabled = !(checkbox1.checked && checkbox2.checked);
+        }
+
+        confirmButton.addEventListener('click', () => {
+            agreement.classList.add('hidden'); // 隐藏协议
+            container.style.filter = 'none'; // 恢复内容显示
+            footer.style.filter = 'none';
+            document.body.style.overflow = 'auto'; // 恢复滚动
+        });
+
+        checkbox1.addEventListener('change', toggleButtonState);
+        checkbox2.addEventListener('change', toggleButtonState);
+    </script>
+
+</body>
+
+</html>
