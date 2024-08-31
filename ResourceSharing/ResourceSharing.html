@@ -354,6 +354,13 @@
                 background-position: -100% 0;
             }
         }
+
+        @supports not (-webkit-background-clip: text) {
+            header {
+                background: none;
+                color: #0078d4; /* 使用纯色作为文字颜色 */
+            }
+        }
     </style>
 </head>
 
