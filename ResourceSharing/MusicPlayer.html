@@ -23,6 +23,28 @@
             border-radius: 25px;
         }
 
+        #home {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #000000;
+            border: none;
+            padding: 6px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 20px;
+            background-clip: text;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #home:hover {
+            filter: blur(0.55px);
+            transform: scale(1.1);
+        }
+
         .music-player {
             width: 90%;
             height: 75%;
@@ -60,6 +82,7 @@
             justify-content: center;
             align-items: center;
         }
+
         #BT button:hover {
             color: #3498db;
             transform: scale(1.1);
@@ -67,6 +90,55 @@
 
         #BT h3 {
             color: #000000;
+        }
+
+        #XX {
+            padding: 0;
+            margin: 0;
+        }
+
+        #XX h7 {
+            font-size: 10px;
+        }
+
+        #XX h6 button {
+            background: none;
+            border: none;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .popup h2 {
+            max-width: 100%;
+            display: block;
+        }
+
+        .popup img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .controls {
@@ -135,6 +207,7 @@
                 max-width: 768px;
                 height: 100%;
             }
+
             h1 {
                 display: none;
             }
@@ -144,11 +217,17 @@
 
 <body>
 
+    <a id="home" href="ResourceSharing.html" target="_blank"><i class="fas fa-home"></i></a>
     <div class="music-player">
         <img id="FM" src="https://wywdyx.github.io/Repository-Public/Image/cat.jpg" alt="封面">
         <div id="BT">
             <h3>江国督の私密</h3>
             <button id="downloadBtn"><i class="fas fa-download"></i></button>
+        </div>
+        <div id="XX">
+            <h6>作曲家：<a href="https://wywdyx.github.io/SITE/Web/Loading.html?referrer=Me.html">WYWDYX</a>
+                专辑：<button id="openPopup" class="link-like-button">江国督原声</button></h6>
+            <h7>音质：无损母带</h7>
         </div>
         <audio id="audio" src="江国督の私密.flac"></audio>
 
@@ -163,6 +242,14 @@
         </div>
     </div>
     <h1>无歌词</h1>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2>《江国督原声》黑胶唱片集将在5024年发售，敬请期待。</h2>
+            <img src="江国督原声.png" alt="江国督原声">
+        </div>
+    </div>
 
     <script>
         const audio = document.getElementById('audio');
@@ -213,6 +300,27 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var openPopupButton = document.getElementById('openPopup');
+            var popup = document.getElementById('popup');
+            var closeButton = document.querySelector('.close-btn');
+
+            openPopupButton.addEventListener('click', function () {
+                popup.style.display = 'flex';
+            });
+
+            closeButton.addEventListener('click', function () {
+                popup.style.display = 'none';
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target === popup) {
+                    popup.style.display = 'none';
+                }
+            });
         });
     </script>
 
